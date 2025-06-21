@@ -2,7 +2,7 @@
 
 Using an ATTiny85 and a 5x5 RGB LED display for a schoolbag patch
 
-<img src="img/patch.gif" style="height:400pc;" /> <img src="img/electronics.png" style="max-height:40vh;"/>
+<img src="img/patch.gif" style="height:400px;" /> <img src="img/electronics.png" style="max-height:40vh;"/>
 
 ## Story
 
