@@ -6,22 +6,24 @@ Using an ATTiny85 and a 5x5 RGB LED display for a schoolbag patch
 
 ## Story
 
-When my little one first started school, she got a new school bag and that had velcro on it so you could attach patches to it. Of course the manufaturer also sold those patches but although there were some cute ones among them end even some with LEDs, they were very simple and boring.
+When my little one first started school, she got a new school bag and that had velcro on it so you could attach patches to it. Of course the manufaturer also sold those patches but although there were some cute ones among them and even some with LEDs, they were very simple and boring.
 
-So, I came up with something interesting: A programmable, recharchable patch that could display simple animations. My choice fell on the ATTiny95 as the microprocessor because I have worked with that in the past, it's easy to use and its power consumption is relatively low.
+So, I came up with something interesting: A programmable, recharchable patch that could display simple animations. My choice fell on the ATTiny85 as the microprocessor because I have worked with that in the past, it's easy to use and its power consumption is relatively low.
 
-To make my little one seen when walking to school, I wanted the LEDs to be bright, unlike those lame flimsy ones you can buy online. My choice here fell on a 5x5 WS2812 Display, enough to display simple animations but still easy anough to create them and it also doesn't use too much power while still being very bright (in fact, I ended up reducing the brightness in the code).
+To avoid my little one being overlooked when walking to school, I wanted the LEDs to be bright, unlike those lame flimsy botton battery ones you can buy online. My choice here fell on a 5x5 WS2812 Display, enough to display simple animations but still easy anough to create them and it also doesn't use too much power while still being very bright (in fact, I ended up reducing the brightness in the code).
 
-I designed a simple PCB, redesigned it a few times, until I ended up with a version I could work with, using the first ones as a base plate to level the patch with the li-ion battery I included.
+I designed a simple PCB, re-designed it a few times, until I ended up with a version I could work with, using the first ones as a base plate to level the patch with the li-ion battery I included.
 
-First, I thought about giving my little one this really nerdy looking path like that but my sister came up with the idea to sew a little case for it. Thus, that was the end product and my little one is happy.
+First, I thought about giving my little one this really nerdy looking patch just like that but my sister came up with the idea to sew a cute little case for it. Thus, that was the end product and my little one is happy.
 
 
 ## Ciruit
 
 <img src="img/circuit.png" style="max-width:80vw;" />
 
-The circuit is very simple, I won't even care to put it into a professional diagram because it's clearer this way: 
+The circuit is very simple, I won't even care to put it into a professional schematics diagram because it's clearer this way.
+
+Components:
 
 - A 250 mAh li-ion battery, enough for about three hours
 - A li-ion charger curcuit to guard the battery from under and over charge and to control the charging process
@@ -32,12 +34,14 @@ The circuit is very simple, I won't even care to put it into a professional diag
 - A pushbutton as input to change animations
 - A 5x5 WS2812 matrix as display
 
+I also used a 10kΩ pullup-resistor for the pushbutton but it should work without it using the INPUT_PULLUP mode on the button pin. I also tried using a A2222 transistor to deactivate the power consumption of the WS2812 matrix display but that didn't work.
+
 These are the ATTiny85 pins I use:
 
 - `Pin2` / `PB4`: Set to INPUT_PULLUP so the line is default high. When the button is pressed, it will connect to ground, thus the signal is low. This can also trigger a low-level interrupt
-- `Pin3` / `PB3`: Connets to the one-wire input of the WS2812 display
-- `Pin4` / `GND`: Connected to ground - after the power switsch
-- `Pin8` / `VCC`: Connected to the protected positiv output of the charger board
+- `Pin3` / `PB3`: Connects to the one-wire input of the WS2812 display
+- `Pin4` / `GND`: Connects to ground - after the power switsch
+- `Pin8` / `VCC`: Connects to the protected positiv output of the charger board
 
 In addition, I have connected these pins to a connector so I could flash the ATTiny85 easily:
 
@@ -72,7 +76,7 @@ The code implements the following features:
 
 ### Animations
 
-All animations are difined in all four orientations: 0°, 90°, 180° and 270°. That way it is easy to change where the pushbutton for example points. The switching works by including the appropriate orientation file `animations*.h` at the beginning of the script.
+All animations are defined in all four orientations: 0°, 90°, 180° and 270°. That way it is easy to change where the pushbutton for example points. The switching works by including the appropriate orientation file `animations*.h` at the beginning of the script.
 
 I also created little JavaScript tools to help creating and editing animations:
 - Editor: [bjsblog.spdns.de/stuff/BjSMatrixEditor2.htm](https://bjsblog.spdns.de/stuff/BjSMatrixEditor2.htm)
