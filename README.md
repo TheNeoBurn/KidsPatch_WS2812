@@ -55,9 +55,9 @@ In addition, I have connected these pins to a connector so I could flash the ATT
 
 The code implements the following features:
 
-- Auto-standby after a defined time (into low-power mode)
-- Standby by long-pressing the pushbutton
-- Wake-up from standby with pushbutton via low-power interrupt
+- Auto-sleep-mode after a defined time (into low-power mode)
+- Sleep-mode by long-pressing the pushbutton
+- Wake-up from sleep-mode with pushbutton via low-power interrupt
 - A custom heart animation with red-pink color shifting
 - A sine-wave rainbow animation
 - A custom animation with a dog repeating a part of the animation
@@ -97,3 +97,10 @@ I use the following Arduino IDE settings:
 > **Do not forget to burn the bootloader before flashing the program!**
 
 To flash the ATTiny, prepare an Arduino (Uno or Nano works best for me), connect the Pins 10 to 13 plus VCC and GND to the ATTiny and use the programmer to upload the script.
+
+
+## Known issues
+
+- I still couldn't find an easy solution to switch off the 5x5 WS2812 Matrix display when entering the sleep-mode. This results is a sugnificant power drain even when the ATTiny is in sleep-mode so the battery won't last long in this state - not even two days.
+- There are different kinds of 5x5 WS2812 matrix displays and the code only supports one specific kind where the LEDS are placed in an alternating pattern and not line by line. Also, I found out that there are mirrored displays. Right now, I only solve this by mirroring the annimation data manually or not at all because it doesn't really matter if the animations are mirrored horizontally.
+- I haven't implemented text scrolling yet and with the storage usage at around 90% I probably won't.
